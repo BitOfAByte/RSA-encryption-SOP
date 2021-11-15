@@ -28,6 +28,9 @@ void encryptMessage() {
   print("Prime 1: " + prime1 + " \nPrime 2: " + prime2 + "\nN: " + N + "\nPhi(N): " + phi);
 }
 
+/*
+https://stackoverflow.com/questions/20435289/prime-number-generator-logic
+*/
 public boolean isPrime(long num) {
     for(int i = 2; i < Math.sqrt(num); i++) {
       if(num % i == 0) {
