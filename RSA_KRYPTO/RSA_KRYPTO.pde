@@ -9,10 +9,8 @@ void setup() {
 
 
 void draw() {
-  encryptMessage();
 }
 
-//Fixme
 void encryptMessage() {
     while(primeCount < 2) {
     Random r = new Random();
@@ -28,15 +26,11 @@ void encryptMessage() {
   print(prime1 + " " + prime2);
 }
 
-
-//Works! 
-boolean isPrime(long num) {
-  for(int i = 2; i < Math.sqrt(num); i++) {
-    if(num % i == 0) {
-      print("NOPE");
-      return false;
+public boolean isPrime(long num) {
+    for(int i = 2; i < Math.sqrt(num); i++) {
+      if(num % i == 0) {
+        return false;
+      }
     }
+    return true;
   }
-  print("Yes! " + num);
-  return true;
-}
