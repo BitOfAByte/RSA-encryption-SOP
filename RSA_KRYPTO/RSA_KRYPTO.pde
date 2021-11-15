@@ -37,6 +37,10 @@ public boolean isPrime(long num) {
     return true;
   }
   
+  
+/*
+https://www.geeksforgeeks.org/eulers-totient-function/
+*/
 public long sfd(long a, long b) {
   if(a == 0) {
     return b;
@@ -46,6 +50,7 @@ public long sfd(long a, long b) {
 }
 
 /*
+https://www.geeksforgeeks.org/eulers-totient-function/
 public long phi(long n) {
   long result = 1;
   for(int i = 2; i < n; i++) {
