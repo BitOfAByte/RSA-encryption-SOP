@@ -1,10 +1,10 @@
 import java.util.Random;
 
-long rand, primeCount, prime1, prime2;
-
+long rand, primeCount, prime1, prime2, N, phi;
 
 
 void setup() {
+  encryptMessage();
 }
 
 
@@ -20,10 +20,12 @@ void encryptMessage() {
       primeCount++;
     } else if (isPrime(rand) && primeCount == 1) {
       prime2 = rand;
+      N = prime1*prime2;
+      phi = (prime1 -1)*(prime2-1);
       primeCount++;     
      }
   } 
-  print(prime1 + " " + prime2);
+  print("Prime 1: " + prime1 + " \nPrime 2: " + prime2 + "\nN: " + N + "\nPhi(N): " + phi);
 }
 
 public boolean isPrime(long num) {
@@ -34,3 +36,23 @@ public boolean isPrime(long num) {
     }
     return true;
   }
+  
+public long sfd(long a, long b) {
+  if(a == 0) {
+    return b;
+  }
+  
+  return sfd(b % a, a);
+}
+
+/*
+public long phi(long n) {
+  long result = 1;
+  for(int i = 2; i < n; i++) {
+    if(sfd(i,n)==1) {
+      result++;
+    }
+  }
+  return result;
+}
+*/
