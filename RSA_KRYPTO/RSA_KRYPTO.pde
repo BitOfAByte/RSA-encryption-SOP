@@ -15,14 +15,20 @@ void encryptMessage() {
     while(primeCount < 2) {
     Random r = new Random();
     rand = r.nextLong();
-    if (isPrime(rand) && primeCount == 0) {
+    if (isPrime(rand) && primeCount == 0 && rand > 0) {
       prime1 = rand;
       primeCount++;
-    } else if (isPrime(rand) && primeCount == 1) {
+    } else if (isPrime(rand) && primeCount == 1 && rand > 0) {
       prime2 = rand;
       N = prime1*prime2;
       phi = (prime1 -1)*(prime2-1);
-      primeCount++;     
+      primeCount++;
+      /*
+      Fix me
+      PrintWriter output = createWriter("Primes.txt");
+      output.flush();
+      output.close();
+      */
      }
   } 
   print("Prime 1: " + prime1 + " \nPrime 2: " + prime2 + "\nN: " + N + "\nPhi(N): " + phi);
