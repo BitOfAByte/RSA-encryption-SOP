@@ -14,8 +14,11 @@ void draw() {
 void encryptMessage() {
     while(primeCount < 2) {
     Random r = new Random();
-    rand = r.nextLong();
-    if (isPrime(rand) && primeCount == 0 && rand > 0) {
+    
+    // hvis problemet er at du får negative tal, så brug et mindre primtal. De negative tal kommer fordi datatypen (long) ikke er stor nok og derfor starter den bare forfra. (overflow) 
+    //rand = r.nextLong();
+    rand = r.nextInt();
+    if (isPrime(rand) && primeCount == 0 && rand > 0) { //<>//
       prime1 = rand;
       primeCount++;
     } else if (isPrime(rand) && primeCount == 1 && rand > 0) {
