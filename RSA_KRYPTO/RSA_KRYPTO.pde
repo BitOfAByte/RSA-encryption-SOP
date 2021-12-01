@@ -1,10 +1,15 @@
 import java.util.Random;
+import java.util.Scanner;
 
-long rand, primeCount, prime1, prime2, N, phi;
-
+int rand, primeCount, prime1, prime2, N, phi;
+int MIN = 10000;
+int MAX = 1000000;
 
 void setup() {
-  encryptMessage();
+     Scanner scanner = new Scanner(System.in);
+     System.out.println("Enter a message");
+     String message = scanner.nextLine();
+     println("Message: " +message);
 }
 
 
@@ -14,11 +19,8 @@ void draw() {
 void encryptMessage() {
     while(primeCount < 2) {
     Random r = new Random();
-    
-    // hvis problemet er at du får negative tal, så brug et mindre primtal. De negative tal kommer fordi datatypen (long) ikke er stor nok og derfor starter den bare forfra. (overflow) 
-    //rand = r.nextLong();
-    rand = r.nextInt();
-    if (isPrime(rand) && primeCount == 0 && rand > 0) { //<>//
+    rand = r.nextInt((MAX - MIN) + 1) + MIN; 
+   if (isPrime(rand) && primeCount == 0 && rand > 0) { //<>//
       prime1 = rand;
       primeCount++;
     } else if (isPrime(rand) && primeCount == 1 && rand > 0) {
