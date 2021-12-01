@@ -29,7 +29,7 @@ void encryptMessage() {
       phi = (prime1 -1)*(prime2-1);
       primeCount++;
       /*
-      Fix me
+      Christan Help mig med at save filen og loade den please me
       PrintWriter output = createWriter("Primes.txt");
       output.flush();
       output.close();
