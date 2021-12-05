@@ -1,4 +1,4 @@
-//import controlP5.*; //<>//
+import controlP5.*; //<>//
 
 import java.util.Random;
 import java.util.List;
@@ -9,20 +9,18 @@ float e, d, messageLength, ascii, N;
 int MIN = 100;
 int MAX = 500;
 List<Float> asc = new ArrayList<Float>();
-//ArrayList<GUI> g = new ArrayList<GUI>();
+ArrayList<GUI> g = new ArrayList<GUI>();
 
-//ControlP5 cp5;
-//GUI gui;
+ControlP5 cp5;
+GUI gui;
 
 void setup() {
-  /*
   size(800, 600);
    fill(0);
    textSize(14);
    cp5 = new ControlP5(this);
    gui = new GUI();
-   */
-  encryptMessage("Hej");
+  //encryptMessage("Hej");
 }
 
 
@@ -51,11 +49,14 @@ void encryptMessage(String message) {
         asc.add(ascii);
       }
       /*
+      Virker perfekt.... 
       PrintWriter output = createWriter("Primes.txt");
        output.println("Prime 1: " + prime1 + "\nPrime 2: " + prime2 + "\nN: " + N + "\nPhi: " + phi + "\nASCII: " + asc);
        output.flush();
        output.close();
        */
+       
+      //Virker ikke.... Den outputter 0.0 
       final float[] arr = new float[asc.size()];
       int index = 0;
       for (final Float value : arr) {
@@ -92,6 +93,13 @@ public long sfd(long a, long b) {
 }
 
 /*
+ControlP5 2.2.6 infos, comments, questions at http://www.sojamo.de/libraries/controlP5
+Dec 05, 2021 6:55:29 PM controlP5.ControlP5 checkName
+WARNING: Controller with name "/encr" already exists. overwriting reference of existing controller.
+Dec 05, 2021 6:55:29 PM controlP5.ControlP5 checkName
+WARNING: Controller with name "/text" already exists. overwriting reference of existing controller.
+[RSA_KRYPTO$GUI@3acf5fbe]
+*/
 public void encr() {
   String result = cp5.get(Textfield.class, "text").getText();
   GUI FUCK = new GUI();
@@ -105,7 +113,7 @@ public void clear() {
   cp5.get(Textfield.class, "text").clear();
 }
 
-
+/*
 https://www.geeksforgeeks.org/eulers-totient-function/
  public long phi(long n) {
  long result = 1;

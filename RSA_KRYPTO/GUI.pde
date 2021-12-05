@@ -1,4 +1,4 @@
-/*
+
 class GUI {
   Button Encrypt, Decrypt;
   Textfield m;
@@ -23,4 +23,3 @@ class GUI {
     this.mess = s;
   }
 }
-*/
