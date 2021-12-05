@@ -1,26 +1,40 @@
-import java.util.Random;
-import java.util.Scanner;
+//import controlP5.*; //<>//
 
-int rand, primeCount, prime1, prime2, N, phi;
-int MIN = 10000;
-int MAX = 1000000;
+import java.util.Random;
+import java.util.List;
+
+int rand, primeCount, prime1, prime2, phi;
+float e, d, messageLength, ascii, N;
+
+int MIN = 100;
+int MAX = 500;
+List<Float> asc = new ArrayList<Float>();
+//ArrayList<GUI> g = new ArrayList<GUI>();
+
+//ControlP5 cp5;
+//GUI gui;
 
 void setup() {
-     Scanner scanner = new Scanner(System.in);
-     System.out.println("Enter a message");
-     String message = scanner.nextLine();
-     println("Message: " +message);
+  /*
+  size(800, 600);
+   fill(0);
+   textSize(14);
+   cp5 = new ControlP5(this);
+   gui = new GUI();
+   */
+  encryptMessage("Hej");
 }
 
 
 void draw() {
+  background(215);
 }
 
-void encryptMessage() {
-    while(primeCount < 2) {
+void encryptMessage(String message) {
+  while (primeCount < 2) {
     Random r = new Random();
-    rand = r.nextInt((MAX - MIN) + 1) + MIN; 
-   if (isPrime(rand) && primeCount == 0 && rand > 0) { //<>//
+    rand = r.nextInt((MAX - MIN) + 1) + MIN;
+    if (isPrime(rand) && primeCount == 0 && rand > 0) {
       prime1 = rand;
       primeCount++;
     } else if (isPrime(rand) && primeCount == 1 && rand > 0) {
@@ -28,50 +42,78 @@ void encryptMessage() {
       N = prime1*prime2;
       phi = (prime1 -1)*(prime2-1);
       primeCount++;
+      e = N/phi*4003*1/2;
+      d = e-1 % phi;
+      messageLength = message.length();
+      for (int i = 0; i < messageLength; i++) {
+        char character = message.charAt(i);
+        ascii = (float) character;
+        asc.add(ascii);
+      }
       /*
-      Christan Help mig med at save filen og loade den please me
       PrintWriter output = createWriter("Primes.txt");
-      output.flush();
-      output.close();
-      */
-     }
-  } 
-  print("Prime 1: " + prime1 + " \nPrime 2: " + prime2 + "\nN: " + N + "\nPhi(N): " + phi);
+       output.println("Prime 1: " + prime1 + "\nPrime 2: " + prime2 + "\nN: " + N + "\nPhi: " + phi + "\nASCII: " + asc);
+       output.flush();
+       output.close();
+       */
+      final float[] arr = new float[asc.size()];
+      int index = 0;
+      for (final Float value : arr) {
+        arr[index++] = value;
+        println(value);
+      }
+    }
+  }
+  println("Prime 1: " + prime1 + " \nPrime 2: " + prime2 + "\nN: " + N + "\nPhi(N): " + phi + "\nAscii " + asc + "\ne: " + e + "\nd: " + d);
 }
 
 /*
 https://stackoverflow.com/questions/20435289/prime-number-generator-logic
-*/
+ */
 public boolean isPrime(long num) {
-    for(int i = 2; i < Math.sqrt(num); i++) {
-      if(num % i == 0) {
-        return false;
-      }
+  for (int i = 2; i < Math.sqrt(num); i++) {
+    if (num % i == 0) {
+      return false;
     }
-    return true;
   }
-  
-  
+  return true;
+}
+
+
 /*
 https://www.geeksforgeeks.org/eulers-totient-function/
-*/
+ */
 public long sfd(long a, long b) {
-  if(a == 0) {
+  if (a == 0) {
     return b;
   }
-  
+
   return sfd(b % a, a);
 }
 
 /*
-https://www.geeksforgeeks.org/eulers-totient-function/
-public long phi(long n) {
-  long result = 1;
-  for(int i = 2; i < n; i++) {
-    if(sfd(i,n)==1) {
-      result++;
-    }
-  }
-  return result;
+public void encr() {
+  String result = cp5.get(Textfield.class, "text").getText();
+  GUI FUCK = new GUI();
+  gui.setTask(result);
+  g.add(FUCK);
+  print(g);
+  clear();
 }
-*/
+
+public void clear() {
+  cp5.get(Textfield.class, "text").clear();
+}
+
+
+https://www.geeksforgeeks.org/eulers-totient-function/
+ public long phi(long n) {
+ long result = 1;
+ for(int i = 2; i < n; i++) {
+ if(sfd(i,n)==1) {
+ result++;
+ }
+ }
+ return result;
+ }
+ */
