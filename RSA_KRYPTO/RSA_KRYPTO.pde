@@ -3,7 +3,7 @@ import controlP5.*; //<>// //<>// //<>// //<>//
 import java.util.Random;
 import java.util.List;
 
-int rand, primeCount, prime1, prime2, phi;
+int rand, primeCount, prime1, prime2, phi,val;
 float e, d, messageLength, ascii, N, cryptedMessage, value;
 
 int MIN = 100;
@@ -31,7 +31,7 @@ void draw() {
   //println(cryptedMessage+" "+result);
 }
 
-void encryptMessage(String message) {
+int encryptMessage(String message) {
   while (primeCount < 2) {
     Random r = new Random();
     rand = r.nextInt((MAX - MIN) + 1) + MIN;
@@ -62,21 +62,22 @@ void encryptMessage(String message) {
       //Virker ikke.... Den outputter 0.0 - jo nu virker det ;)
       float[] arr = new float[asc.size()];
       int index = 0;
-      int val=0;
       for (float value : arr) {
         //arr[index++] = value;
         value = asc.get(index++);
         val = (int)value;
-        //Printer infinity men det passer ikke
-        print(pow(val,e));
-        
+        //printer 72101106 som er korrekt 
+        print(val);
       }
-      /*
-      cryptedMessage = pow(value,e);
-       println("Den krypterede besked er: " + cryptedMessage);
-       */
+      
+      //printer 106
+       println("\nWrong value : " + val);
     }
+    
+      //cryptedMessage = (int) pow(val,e);
+     //print(cryptedMessage);
   }
+    return (int) cryptedMessage;
 }
 
 /*
