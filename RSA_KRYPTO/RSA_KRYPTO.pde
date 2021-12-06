@@ -1,10 +1,10 @@
-import controlP5.*; //<>//
+import controlP5.*; //<>// //<>// //<>// //<>//
 
 import java.util.Random;
 import java.util.List;
 
 int rand, primeCount, prime1, prime2, phi;
-float e, d, messageLength, ascii, N;
+float e, d, messageLength, ascii, N, cryptedMessage, value;
 
 int MIN = 100;
 int MAX = 500;
@@ -16,22 +16,22 @@ GUI gui;
 
 void setup() {
   size(800, 600);
-   fill(0);
-   textSize(14);
-   cp5 = new ControlP5(this);
-   gui = new GUI();
-    //<>//
+  fill(0);
+  textSize(14);
+  cp5 = new ControlP5(this);
+  gui = new GUI();
+  encryptMessage("Hej");
 }
 
 
 void draw() {
   background(215);
   String result = gui.getTextField();
-   String cryptedMessage = encryptMessage(result);
-   println(cryptedMessage+" "+result);
+  //int cryptedMessage = encryptMessage(result);
+  //println(cryptedMessage+" "+result);
 }
 
-String encryptMessage(String message) {
+void encryptMessage(String message) {
   while (primeCount < 2) {
     Random r = new Random();
     rand = r.nextInt((MAX - MIN) + 1) + MIN;
@@ -43,7 +43,7 @@ String encryptMessage(String message) {
       N = prime1*prime2;
       phi = (prime1 -1)*(prime2-1);
       primeCount++;
-      e = N/phi*4003*1/2; //<>//
+      e = N/phi*4003*1/2;
       d = e-1 % phi;
       messageLength = message.length();
       for (int i = 0; i < messageLength; i++) {
@@ -52,26 +52,31 @@ String encryptMessage(String message) {
         asc.add(ascii);
       }
       /*
-      Virker perfekt.... 
-      PrintWriter output = createWriter("Primes.txt");
+      Virker perfekt....
+       PrintWriter output = createWriter("Primes.txt");
        output.println("Prime 1: " + prime1 + "\nPrime 2: " + prime2 + "\nN: " + N + "\nPhi: " + phi + "\nASCII: " + asc);
        output.flush();
        output.close();
        */
-       
+
       //Virker ikke.... Den outputter 0.0 - jo nu virker det ;)
-      float[] arr = new float[asc.size()]; //<>//
+      float[] arr = new float[asc.size()];
       int index = 0;
+      int val=0;
       for (float value : arr) {
         //arr[index++] = value;
         value = asc.get(index++);
-        println(value);
+        val = (int)value;
+        //Printer infinity men det passer ikke
+        print(pow(val,e));
+        
       }
+      /*
+      cryptedMessage = pow(value,e);
+       println("Den krypterede besked er: " + cryptedMessage);
+       */
     }
   }
-  println("Prime 1: " + prime1 + " \nPrime 2: " + prime2 + "\nN: " + N + "\nPhi(N): " + phi + "\nAscii " + asc + "\ne: " + e + "\nd: " + d);
-
-  return "Krypteret besked";
 }
 
 /*
@@ -100,12 +105,12 @@ public long sfd(long a, long b) {
 
 /*
 ControlP5 2.2.6 infos, comments, questions at http://www.sojamo.de/libraries/controlP5
-Dec 05, 2021 6:55:29 PM controlP5.ControlP5 checkName
-WARNING: Controller with name "/encr" already exists. overwriting reference of existing controller.
-Dec 05, 2021 6:55:29 PM controlP5.ControlP5 checkName
-WARNING: Controller with name "/text" already exists. overwriting reference of existing controller.
-[RSA_KRYPTO$GUI@3acf5fbe]
-*/
+ Dec 05, 2021 6:55:29 PM controlP5.ControlP5 checkName
+ WARNING: Controller with name "/encr" already exists. overwriting reference of existing controller.
+ Dec 05, 2021 6:55:29 PM controlP5.ControlP5 checkName
+ WARNING: Controller with name "/text" already exists. overwriting reference of existing controller.
+ [RSA_KRYPTO$GUI@3acf5fbe]
+ */
 
 
 
