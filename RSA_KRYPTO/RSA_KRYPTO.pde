@@ -74,8 +74,8 @@ int encryptMessage(String message) {
        println("\nWrong value : " + val);
     }
     
-      //cryptedMessage = (int) pow(val,e);
-     //print(cryptedMessage);
+      cryptedMessage = (int) pow(val,e);
+      print(cryptedMessage);
   }
     return (int) cryptedMessage;
 }
