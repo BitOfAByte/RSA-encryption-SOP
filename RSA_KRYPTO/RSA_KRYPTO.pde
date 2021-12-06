@@ -20,15 +20,18 @@ void setup() {
    textSize(14);
    cp5 = new ControlP5(this);
    gui = new GUI();
-  encryptMessage("Hej"); //<>//
+    //<>//
 }
 
 
 void draw() {
   background(215);
+  String result = gui.getTextField();
+   String cryptedMessage = encryptMessage(result);
+   println(cryptedMessage+" "+result);
 }
 
-void encryptMessage(String message) {
+String encryptMessage(String message) {
   while (primeCount < 2) {
     Random r = new Random();
     rand = r.nextInt((MAX - MIN) + 1) + MIN;
@@ -40,10 +43,10 @@ void encryptMessage(String message) {
       N = prime1*prime2;
       phi = (prime1 -1)*(prime2-1);
       primeCount++;
-      e = N/phi*4003*1/2;
+      e = N/phi*4003*1/2; //<>//
       d = e-1 % phi;
       messageLength = message.length();
-      for (int i = 0; i < messageLength; i++) { //<>//
+      for (int i = 0; i < messageLength; i++) {
         char character = message.charAt(i);
         ascii = (float) character;
         asc.add(ascii);
@@ -56,7 +59,7 @@ void encryptMessage(String message) {
        output.close();
        */
        
-      //Virker ikke.... Den outputter 0.0 
+      //Virker ikke.... Den outputter 0.0 - jo nu virker det ;)
       float[] arr = new float[asc.size()]; //<>//
       int index = 0;
       for (float value : arr) {
@@ -67,6 +70,8 @@ void encryptMessage(String message) {
     }
   }
   println("Prime 1: " + prime1 + " \nPrime 2: " + prime2 + "\nN: " + N + "\nPhi(N): " + phi + "\nAscii " + asc + "\ne: " + e + "\nd: " + d);
+
+  return "Krypteret besked";
 }
 
 /*
@@ -101,18 +106,9 @@ Dec 05, 2021 6:55:29 PM controlP5.ControlP5 checkName
 WARNING: Controller with name "/text" already exists. overwriting reference of existing controller.
 [RSA_KRYPTO$GUI@3acf5fbe]
 */
-public void encr() {
-  String result = cp5.get(Textfield.class, "text").getText();
-  GUI FUCK = new GUI();
-  gui.setTask(result);
-  g.add(FUCK);
-  print(g);
-  clear();
-}
 
-public void clear() {
-  cp5.get(Textfield.class, "text").clear();
-}
+
+
 
 /*
 https://www.geeksforgeeks.org/eulers-totient-function/
