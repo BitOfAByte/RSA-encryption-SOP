@@ -65,9 +65,10 @@ int encryptMessage(String message) {
       for (float value : arr) {
         //arr[index++] = value;
         value = asc.get(index++);
-        val = (int)value;
+        val = (int)value; //<>//
         //printer 72101106 som er korrekt 
         print(val);
+        println("\nWrong value : " + val);
       }
       
       //printer 106
