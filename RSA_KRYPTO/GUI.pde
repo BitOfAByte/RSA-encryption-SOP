@@ -19,7 +19,14 @@ class GUI {
       ;
   }
   
-   public void setTask(String s) {
+   void setTask(String s) {
     this.mess = s;
   }
+  
+  String getTextField() {
+    return(cp5.get(Textfield.class, "text").getText());
+  }
+void claerTextField(){
+  cp5.get(Textfield.class, "text").clear();
+}
 }
