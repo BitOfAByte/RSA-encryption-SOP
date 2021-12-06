@@ -20,7 +20,7 @@ void setup() {
    textSize(14);
    cp5 = new ControlP5(this);
    gui = new GUI();
-  //encryptMessage("Hej");
+  encryptMessage("Hej"); //<>//
 }
 
 
@@ -43,7 +43,7 @@ void encryptMessage(String message) {
       e = N/phi*4003*1/2;
       d = e-1 % phi;
       messageLength = message.length();
-      for (int i = 0; i < messageLength; i++) {
+      for (int i = 0; i < messageLength; i++) { //<>//
         char character = message.charAt(i);
         ascii = (float) character;
         asc.add(ascii);
@@ -57,10 +57,11 @@ void encryptMessage(String message) {
        */
        
       //Virker ikke.... Den outputter 0.0 
-      final float[] arr = new float[asc.size()];
+      float[] arr = new float[asc.size()]; //<>//
       int index = 0;
-      for (final Float value : arr) {
-        arr[index++] = value;
+      for (float value : arr) {
+        //arr[index++] = value;
+        value = asc.get(index++);
         println(value);
       }
     }
