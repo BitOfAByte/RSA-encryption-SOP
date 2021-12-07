@@ -65,7 +65,7 @@ int encryptMessage(String message) {
       for (float value : arr) {
         value = asc.get(index++);
         val = (int)value; //<>//
-        print(val);
+        println(pow(val,e));
         cryptedMessage = pow(val, e);
         PrintWriter outp = createWriter("Crypted message.txt");
         outp.println(cryptedMessage);
