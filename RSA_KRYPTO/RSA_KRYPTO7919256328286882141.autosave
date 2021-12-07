@@ -1,4 +1,4 @@
-import controlP5.*; //<>// //<>// //<>// //<>// //<>//
+import controlP5.*; //<>// //<>// //<>//
 
 import java.util.Random;
 import java.util.List;
@@ -63,16 +63,19 @@ int encryptMessage(String message) {
       float[] arr = new float[asc.size()];
       int index = 0;
       for (float value : arr) {
+        //arr[index++] = value;
         value = asc.get(index++);
-        val = (int)value; //<>//
+        val = (int)value;
+        //printer 72101106 som er korrekt 
         print(val);
-        cryptedMessage = pow(val, e);
-        PrintWriter outp = createWriter("Crypted message.txt");
-        outp.println(cryptedMessage);
-        outp.flush();
-        outp.close();
       }
+      
+      //printer 106
+       println("\nWrong value : " + val);
     }
+    
+      cryptedMessage = (int) pow(val,e);
+      print(cryptedMessage);
   }
     return (int) cryptedMessage;
 }
