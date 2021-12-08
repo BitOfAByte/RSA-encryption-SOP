@@ -1,4 +1,4 @@
-import controlP5.*; //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>//
+import controlP5.*; //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>//
 
 import java.util.Random;
 import java.util.List;
@@ -69,6 +69,7 @@ int encyptMessage(String message) {
   //Encryption
   for (int i = 0; i < asc.size(); i++) {
     double element = Math.pow(asc.get(i), e);
+    println("Element: ", element);
     encrypedMessage.clear();
     encrypedMessage.add(element);
   }
