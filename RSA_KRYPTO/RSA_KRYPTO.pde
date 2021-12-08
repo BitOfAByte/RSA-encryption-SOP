@@ -5,10 +5,11 @@ import java.util.List;
 
 
 float messageLength, value;
-double ascii;
-List<Double> asc = new ArrayList<Double>();
-List<Double> encrypedMessage = new ArrayList<Double>();
-List<Double> decryptedMessage = new ArrayList<Double>();
+int ascii;
+List<Integer> asc = new ArrayList<Integer>();
+List<Long> encrypedMessage = new ArrayList<Long>();
+//List<Double> decryptedMessage = new ArrayList<Double>();
+List<Long> decryptedMessage = new ArrayList<Long>();
 ArrayList<GUI> g = new ArrayList<GUI>();
 int cryptedMessage;
 
@@ -33,7 +34,7 @@ void draw() {
 }
 
 int encyptMessage(String message) {
-  long p = 3;
+  long p = 3; //<>//
   long q = 7;
   long n = p*q;
   long e = 5;
@@ -49,26 +50,28 @@ int encyptMessage(String message) {
   messageLength = message.length();
   for (int i = 0; i < messageLength; i++) {
     char character = message.charAt(i);
-    ascii = (float) character;
+    //ascii = (float) character;
+    ascii = Integer.valueOf(character) ; //<>//
     asc.add(ascii);
   }
 
   println("list: ", asc);
   
   
-  float[] arr = new float[asc.size()];
+  int[] arr = new int[asc.size()];
   int index = 0;
   int val = 0;
-  for (double value : arr) {
+  //for (double value : arr) {
+    for (int value : arr) {
     value = asc.get(index++);
-    value = Math.round(value);
+    //value = Math.round(value);
     println(value);
   }
-  
+   //<>//
   
   //Encryption
   for (int i = 0; i < asc.size(); i++) {
-    double element = Math.pow(asc.get(i), e);
+    long element = (int)Math.pow(asc.get(i), e);
     println("Element: ", element);
     encrypedMessage.clear();
     encrypedMessage.add(element);
@@ -77,7 +80,7 @@ int encyptMessage(String message) {
 
   //Decryption
   for (int i = 0; i < encrypedMessage.size(); i++) {
-    double element = Math.pow(encrypedMessage.get(i), e);
+    long element = (long)Math.pow(encrypedMessage.get(i), e);
     decryptedMessage.add(element);
   }
 
