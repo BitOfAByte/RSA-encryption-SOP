@@ -75,6 +75,7 @@ BigInteger encyptMessage(String message) {
   }
   
   cryptedMessage = (BigInteger) encrypedMessage;
+  println(cryptedMessage);
   return cryptedMessage;
 }
 
