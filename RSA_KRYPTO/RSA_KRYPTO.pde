@@ -46,9 +46,10 @@ BigInteger encyptMessage(String message) {
   BigInteger p = BigInteger.valueOf(1031);
   BigInteger q = BigInteger.valueOf(907);
   BigInteger n = p.multiply(q);
-  BigInteger phi = p.subtract(BigInteger.ONE).multiply(q.subtract(BigInteger.ONE));
+  BigInteger phi = p.subtract(BigInteger.ONE).multiply(q.subtract(BigInteger.ONE)); //Det er det samme som (p-1)*(q-1);
   BigInteger e = BigInteger.valueOf(49);
   BigInteger gcd = gcd(e, phi);
+  //modInverse Does not exist
   BigInteger d = EA.modInverse(e, phi);
 
   messageLength = message.length();
