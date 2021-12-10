@@ -5,10 +5,11 @@ import java.util.List;
 import java.math.BigInteger;
 
 float messageLength, value;
-double ascii;
-List<Double> asc = new ArrayList<Double>();
-List<Double> encrypedMessage = new ArrayList<Double>();
-List<Double> decryptedMessage = new ArrayList<Double>();
+int ascii;
+List<Integer> asc = new ArrayList<Integer>();
+List<Long> encrypedMessage = new ArrayList<Long>();
+//List<Double> decryptedMessage = new ArrayList<Double>();
+List<Long> decryptedMessage = new ArrayList<Long>();
 ArrayList<GUI> g = new ArrayList<GUI>();
 BigInteger cryptedMessage;
 BigInteger bigI;
