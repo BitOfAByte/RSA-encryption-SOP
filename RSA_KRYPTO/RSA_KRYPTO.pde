@@ -1,4 +1,4 @@
-import controlP5.*; //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>//
+import controlP5.*; //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>//
 
 import java.util.Random;
 import java.util.List;
@@ -17,7 +17,7 @@ BigInteger bigI;
 ControlP5 cp5;
 GUI gui;
 
-EuklidsAlgo EA;
+ExtendedEuclidean Euclidean;
 
 void setup() {
   size(800, 600);
@@ -25,7 +25,7 @@ void setup() {
   textSize(14);
   cp5 = new ControlP5(this);
   gui = new GUI();
-  EA = new EuklidsAlgo();
+  Euclidean = new ExtendedEuclidean();
   encyptMessage("H");
 }
 
@@ -46,37 +46,19 @@ BigInteger encyptMessage(String message) {
   BigInteger p = BigInteger.valueOf(1031);
   BigInteger q = BigInteger.valueOf(907);
   BigInteger n = p.multiply(q);
-  BigInteger phi = p.subtract(BigInteger.ONE).multiply(q.subtract(BigInteger.ONE)); //Det er det samme som (p-1)*(q-1);
+  BigInteger phi = p.subtract(BigInteger.ONE).multiply(q.subtract(BigInteger.ONE));
   BigInteger e = BigInteger.valueOf(49);
-  BigInteger gcd = gcd(e, phi);
-  //modInverse Does not exist
-  BigInteger d = EA.modInverse(e, phi);
-
-  messageLength = message.length();
-  for (int i = 0; i < messageLength; i++) {
-    char character = message.charAt(i);
-    ascii = (int) character;
-    asc.add(ascii);
-  }
+  BigInteger d = Euclidean.modInverse(e, phi);
+  String msg = message;
+  byte[] b = msg.getBytes();
   
-  /*
-  *The method pow(double, double) in the type Math is not applicable for the arguments (Double, BigInteger)
-  */
-  for (int i = 0; i < asc.size(); i++) {
-    double element = Math.pow(asc.get(i), e) % n;
-    encrypedMessage.add(element);
-  }
+  println("P:", p + " Q:", q + " N:", n + " Phi:", phi + " E:", e + " D:", d);
   
-  /*
-  *The method pow(double, double) in the type Math is not applicable for the arguments (Double, BigInteger)
-  */
-  for (int i = 0; i < encrypedMessage.size(); i++) {
-    double element = Math.pow(encrypedMessage.get(i), d) % n;
-    decryptedMessage.add(element);
-  }
-  
-  cryptedMessage = (BigInteger) encrypedMessage;
+  cryptedMessage = encrypt(b, e, n);
   println(cryptedMessage);
+  
+  BigInteger dMessage = decrypt(b,d,n);
+  println(dMessage);
   return cryptedMessage;
 }
 
@@ -90,4 +72,24 @@ public BigInteger gcd(BigInteger a, BigInteger b) {
   }
   BigInteger gcd = gcd(b, a.mod(b));
   return gcd;
+}
+
+public BigInteger modPow(BigInteger base, BigInteger exponent, BigInteger mod) {
+  if (exponent.equals(BigInteger.ZERO)) {
+    return BigInteger.ONE;
+  }
+  BigInteger z = modPow(base, exponent.divide(BigInteger.TWO), mod);
+  if (exponent.mod(BigInteger.TWO).equals(BigInteger.ZERO)) {
+    return z.multiply(z).mod(mod);
+  } else
+    return base.multiply(z.multiply(z)).mod(mod);
+}
+
+
+public BigInteger encrypt(byte[] message, BigInteger e, BigInteger N) {
+  return modPow(new BigInteger(message), e, N);
+}
+
+public BigInteger decrypt(byte[] message, BigInteger d, BigInteger N) {
+  return modPow(new BigInteger(message), d, N);
 }
