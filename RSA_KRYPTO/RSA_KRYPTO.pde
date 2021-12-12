@@ -7,8 +7,8 @@ import java.math.BigInteger;
 float messageLength, value;
 int ascii;
 List<Integer> asc = new ArrayList<Integer>();
-List<Long> encrypedMessage = new ArrayList<Long>();
-List<Long> decryptedMessage = new ArrayList<Long>();
+List<BigInteger> encrypedMessage = new ArrayList<BigInteger>();
+List<BigInteger> decryptedMessage = new ArrayList<BigInteger>();
 ArrayList<GUI> g = new ArrayList<GUI>();
 BigInteger cryptedMessage;
 BigInteger bigI;
@@ -21,13 +21,13 @@ ExtendedEuclidean Euclidean;
 void setup() {
   /*
   size(800, 600);
-  fill(0);
-  textSize(14);
-  cp5 = new ControlP5(this);
-  gui = new GUI();
-  */
+   fill(0);
+   textSize(14);
+   cp5 = new ControlP5(this);
+   gui = new GUI();
+   */
   Euclidean = new ExtendedEuclidean();
-  encyptMessage("h");
+  encyptMessage("Hej");
 }
 
 
@@ -50,20 +50,36 @@ BigInteger encyptMessage(String message) {
   BigInteger phi = p.subtract(BigInteger.ONE).multiply(q.subtract(BigInteger.ONE));
   BigInteger e = BigInteger.valueOf(49);
   BigInteger d = Euclidean.modInverse(e, phi);
+
+  messageLength = message.length();
+  for (int i = 0; i < messageLength; i++) {
+    char character = message.charAt(i);
+    ascii = (int) character;
+    asc.add(ascii);
+  }
   
-  String msg = message;
-  byte[] b = msg.getBytes();
-  
+  println(asc);
+
   println("P:", p + " Q:", q + " N:", n + " Phi:", phi + " E:", e + " D:", d);
-  println("Message: ", msg);
+
   
-  cryptedMessage = encrypt(b, e, n);
-  println(cryptedMessage);
+  //Encryption
+  for(int i=0; i < asc.size(); i++){
+     BigInteger c = encrypt(asc.get(i), e, n);
+     encrypedMessage.add(c);
+  } //<>//
+  println("Encrypted: " + encrypedMessage.toString());
+
   
-  BigInteger dMessage = decrypt(cryptedMessage,d,n);
-  println(dMessage);
+  //Decryption
+  for(int i=0; i < encrypedMessage.size(); i++){
+     BigInteger decrypted = decrypt(encrypedMessage.get(i), d, n);
+     decryptedMessage.add(decrypted);
+  }
+  println("Decrypted: " + decryptedMessage.toString());
   
-  return cryptedMessage;
+  
+  return cryptedMessage; //<>//
 }
 
 /*
@@ -90,8 +106,8 @@ public BigInteger modPow(BigInteger base, BigInteger exponent, BigInteger mod) {
 }
 
 
-public BigInteger encrypt(byte[] message, BigInteger e, BigInteger N) {
-  return modPow(new BigInteger(message), e, N);
+public BigInteger encrypt(int message, BigInteger e, BigInteger N) {
+  return modPow(BigInteger.valueOf(message), e, N);
 }
 
 public BigInteger decrypt(BigInteger Cryptedmessage, BigInteger d, BigInteger N) {
