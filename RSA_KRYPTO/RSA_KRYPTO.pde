@@ -1,4 +1,4 @@
-import controlP5.*; //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>//
+import controlP5.*; //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>//
 
 import java.util.Random;
 import java.util.List;
@@ -12,6 +12,7 @@ List<BigInteger> decryptedMessage = new ArrayList<BigInteger>();
 ArrayList<GUI> g = new ArrayList<GUI>();
 BigInteger cryptedMessage;
 BigInteger bigI;
+String decrpyOut;
 
 ControlP5 cp5;
 GUI gui;
@@ -19,23 +20,19 @@ GUI gui;
 ExtendedEuclidean Euclidean;
 
 void setup() {
-  /*
   size(800, 600);
    fill(0);
    textSize(14);
    cp5 = new ControlP5(this);
    gui = new GUI();
-   */
   Euclidean = new ExtendedEuclidean();
-  encyptMessage("Hej");
+  encyptMessage("sudo rm -rf /*");
+  encr();
 }
 
 
 void draw() {
   background(215);
-  //String result = gui.getTextField();
-  //int cryptedMessage = encryptMessage(result);
-  //println(cryptedMessage+" "+result);
 }
 
 /*
@@ -43,7 +40,7 @@ void draw() {
  * https://github.com/ergesmema/RSA-Java/blob/main/src/RSA/RSA.java
  */
 
-BigInteger encyptMessage(String message) {
+void encyptMessage(String message) {
   BigInteger p = BigInteger.valueOf(1031);
   BigInteger q = BigInteger.valueOf(907);
   BigInteger n = p.multiply(q);
@@ -57,29 +54,31 @@ BigInteger encyptMessage(String message) {
     ascii = (int) character;
     asc.add(ascii);
   }
-  
-  println(asc);
 
   println("P:", p + " Q:", q + " N:", n + " Phi:", phi + " E:", e + " D:", d);
+  println("ASCII ", asc);
 
-  
   //Encryption
-  for(int i=0; i < asc.size(); i++){
-     BigInteger c = encrypt(asc.get(i), e, n);
-     encrypedMessage.add(c);
-  } //<>//
+  for (int i=0; i < asc.size(); i++) {
+    BigInteger c = encrypt(asc.get(i), e, n);
+    encrypedMessage.add(c);
+  }
   println("Encrypted: " + encrypedMessage.toString());
 
-  
+
   //Decryption
-  for(int i=0; i < encrypedMessage.size(); i++){
-     BigInteger decrypted = decrypt(encrypedMessage.get(i), d, n);
-     decryptedMessage.add(decrypted);
+  for (int i=0; i < encrypedMessage.size(); i++) {
+    BigInteger decrypted = decrypt(encrypedMessage.get(i), d, n);
+    decryptedMessage.add(decrypted);
   }
   println("Decrypted: " + decryptedMessage.toString());
-  
-  
-  return cryptedMessage; //<>//
+
+  for ( BigInteger x : decryptedMessage) {
+    int xint= x.intValue();
+    char str = (char) xint;
+    decrpyOut+= str;
+  }
+  println(decrpyOut); //<>//
 }
 
 /*
@@ -112,4 +111,9 @@ public BigInteger encrypt(int message, BigInteger e, BigInteger N) {
 
 public BigInteger decrypt(BigInteger Cryptedmessage, BigInteger d, BigInteger N) {
   return modPow(Cryptedmessage, d, N);
+}
+
+
+void encr() {
+  print(cp5.get(Textfield.class, "text").getText());
 }
