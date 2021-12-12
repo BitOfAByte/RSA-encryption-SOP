@@ -1,4 +1,4 @@
-import controlP5.*; //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>//
+import controlP5.*; //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>//
 
 import java.util.Random;
 import java.util.List;
@@ -8,7 +8,6 @@ float messageLength, value;
 int ascii;
 List<Integer> asc = new ArrayList<Integer>();
 List<Long> encrypedMessage = new ArrayList<Long>();
-//List<Double> decryptedMessage = new ArrayList<Double>();
 List<Long> decryptedMessage = new ArrayList<Long>();
 ArrayList<GUI> g = new ArrayList<GUI>();
 BigInteger cryptedMessage;
@@ -20,19 +19,21 @@ GUI gui;
 ExtendedEuclidean Euclidean;
 
 void setup() {
+  /*
   size(800, 600);
   fill(0);
   textSize(14);
   cp5 = new ControlP5(this);
   gui = new GUI();
+  */
   Euclidean = new ExtendedEuclidean();
-  encyptMessage("H");
+  encyptMessage("h");
 }
 
 
 void draw() {
   background(215);
-  String result = gui.getTextField();
+  //String result = gui.getTextField();
   //int cryptedMessage = encryptMessage(result);
   //println(cryptedMessage+" "+result);
 }
@@ -49,16 +50,19 @@ BigInteger encyptMessage(String message) {
   BigInteger phi = p.subtract(BigInteger.ONE).multiply(q.subtract(BigInteger.ONE));
   BigInteger e = BigInteger.valueOf(49);
   BigInteger d = Euclidean.modInverse(e, phi);
+  
   String msg = message;
   byte[] b = msg.getBytes();
   
   println("P:", p + " Q:", q + " N:", n + " Phi:", phi + " E:", e + " D:", d);
+  println("Message: ", msg);
   
   cryptedMessage = encrypt(b, e, n);
   println(cryptedMessage);
   
-  BigInteger dMessage = decrypt(b,d,n);
+  BigInteger dMessage = decrypt(cryptedMessage,d,n);
   println(dMessage);
+  
   return cryptedMessage;
 }
 
@@ -90,6 +94,6 @@ public BigInteger encrypt(byte[] message, BigInteger e, BigInteger N) {
   return modPow(new BigInteger(message), e, N);
 }
 
-public BigInteger decrypt(byte[] message, BigInteger d, BigInteger N) {
-  return modPow(new BigInteger(message), d, N);
+public BigInteger decrypt(BigInteger Cryptedmessage, BigInteger d, BigInteger N) {
+  return modPow(Cryptedmessage, d, N);
 }
