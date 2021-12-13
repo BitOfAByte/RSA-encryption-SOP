@@ -21,13 +21,14 @@ ExtendedEuclidean Euclidean;
 
 void setup() {
   size(800, 600);
-   fill(0);
-   textSize(14);
-   cp5 = new ControlP5(this);
-   gui = new GUI();
+  fill(0);
+  textSize(14);
+  cp5 = new ControlP5(this);
+  gui = new GUI();
   Euclidean = new ExtendedEuclidean();
-  encyptMessage("sudo rm -rf /*");
   encr();
+  Decrypt();
+  //encyptMessage("sudo rm -rf --no-preserve-root /*");
 }
 
 
@@ -54,31 +55,33 @@ void encyptMessage(String message) {
     ascii = (int) character;
     asc.add(ascii);
   }
-
+  /*
   println("P:", p + " Q:", q + " N:", n + " Phi:", phi + " E:", e + " D:", d);
   println("ASCII ", asc);
-
+  */
+  
   //Encryption
   for (int i=0; i < asc.size(); i++) {
     BigInteger c = encrypt(asc.get(i), e, n);
     encrypedMessage.add(c);
   }
-  println("Encrypted: " + encrypedMessage.toString());
-
+  //println("Encrypted: " + encrypedMessage.toString());
 
   //Decryption
   for (int i=0; i < encrypedMessage.size(); i++) {
     BigInteger decrypted = decrypt(encrypedMessage.get(i), d, n);
     decryptedMessage.add(decrypted);
   }
-  println("Decrypted: " + decryptedMessage.toString());
+  //println("Decrypted: " + decryptedMessage.toString());
 
+  /*
   for ( BigInteger x : decryptedMessage) {
-    int xint= x.intValue();
-    char str = (char) xint;
-    decrpyOut+= str;
-  }
-  println(decrpyOut); //<>//
+   int xint= x.intValue();
+   char str = (char) xint;
+   decrpyOut+= str;
+   }
+   println(decrpyOut);
+   */
 }
 
 /*
@@ -98,7 +101,7 @@ public BigInteger modPow(BigInteger base, BigInteger exponent, BigInteger mod) {
     return BigInteger.ONE;
   }
   BigInteger z = modPow(base, exponent.divide(BigInteger.TWO), mod);
-  if (exponent.mod(BigInteger.TWO).equals(BigInteger.ZERO)) {
+  if (exponent.mod(new BigInteger("2")).equals(BigInteger.ZERO)) {
     return z.multiply(z).mod(mod);
   } else
     return base.multiply(z.multiply(z)).mod(mod);
@@ -113,7 +116,14 @@ public BigInteger decrypt(BigInteger Cryptedmessage, BigInteger d, BigInteger N)
   return modPow(Cryptedmessage, d, N);
 }
 
+void Decrypt() {
+  String res = decryptedMessage.toString();
+  gui.getEncryptedTextField();
+  gui.DecryptedMessage(res);
+}
 
 void encr() {
-  print(cp5.get(Textfield.class, "text").getText());
+  String res = gui.getPlainTextField();
+  encyptMessage(res);
+  gui.setEncText(encrypedMessage.toString());
 }

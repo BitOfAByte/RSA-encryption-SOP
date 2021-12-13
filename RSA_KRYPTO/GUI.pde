@@ -1,7 +1,9 @@
 
 class GUI {
   Button Encrypt, Decrypt;
-  Textfield m;
+  Textfield PlainText;
+  Textfield EncryptedMessages;
+  Textfield KlarText;
   String mess;
 
   GUI() {
@@ -12,14 +14,14 @@ class GUI {
       ;
 
 
-    m = cp5.addTextfield("text");
-    m.setPosition(100, 100)
+    PlainText = cp5.addTextfield("text");
+    PlainText.setPosition(100, 100)
       .setSize(200, 30)
       .setFocus(true)
       ;
 
-    m = cp5.addTextfield("EncryptedText");
-    m.setPosition(100, 150)
+    EncryptedMessages = cp5.addTextfield("EncryptedText");
+    EncryptedMessages.setPosition(100, 150)
       .setSize(200, 30)
       .setFocus(true)
       ;
@@ -32,20 +34,30 @@ class GUI {
       ;
       
       
-    m = cp5.addTextfield("Plain Text");
-    m.setPosition(100, 200)
+    KlarText = cp5.addTextfield("PlainText");
+    KlarText.setPosition(100, 200)
       .setSize(500, 40)
       .setFocus(true)
       ;
   }
 
-  void setTask(String s) {
-    this.mess = s;
+  void setEncText(String s) {
+    EncryptedMessages.setText(s);
   }
-
-  String getTextField() {
+  
+  String getPlainTextField() {
     return(cp5.get(Textfield.class, "text").getText());
   }
+
+  String getEncryptedTextField() {
+    return(cp5.get(Textfield.class, "EncryptedText").getText());
+  }
+  
+   
+   void DecryptedMessage(String s) {
+     PlainText.setText(s);
+   } 
+  
   void claerTextField() {
     cp5.get(Textfield.class, "text").clear();
   }
