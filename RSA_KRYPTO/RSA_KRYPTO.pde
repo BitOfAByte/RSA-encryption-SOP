@@ -1,4 +1,4 @@
-import controlP5.*; //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>//
+import controlP5.*; //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>//
 
 import java.util.Random;
 import java.util.List;
@@ -28,7 +28,6 @@ void setup() {
   Euclidean = new ExtendedEuclidean();
   encr();
   Decrypt();
-  //encyptMessage("sudo rm -rf --no-preserve-root /*");
 }
 
 
@@ -45,11 +44,19 @@ void encyptMessage(String message) {
   BigInteger p = BigInteger.valueOf(1031);
   BigInteger q = BigInteger.valueOf(907);
   BigInteger n = p.multiply(q);
-  BigInteger e = BigInteger.valueOf(49);
   BigInteger phi = p.subtract(BigInteger.ONE).multiply(q.subtract(BigInteger.ONE));
+  
+  int e1;
+  for (e1 = 2; e1 < phi.intValue(); e1++) {
+    BigInteger a = gcd(BigInteger.valueOf(e1), phi);
+    // e is for public key exponent
+    if (a.intValue() == 1) {
+      break;
+    }
+  }
+  BigInteger e = BigInteger.valueOf(e1);
   BigInteger d = Euclidean.modInverse(e, phi);
-  
-  
+
   messageLength = message.length();
   for (int i = 0; i < messageLength; i++) {
     char character = message.charAt(i);

@@ -5,11 +5,13 @@ import java.math.BigInteger;
 */
 
 public class ExtendedEuclidean{
+  //Laver en datatype 
     public class Triplet{
         BigInteger gcd;
         BigInteger x;
         BigInteger y;
-
+        
+        //Constructor
         public Triplet(BigInteger gcd, BigInteger x, BigInteger y){
             this.gcd = gcd;
             this.x = x;
@@ -25,6 +27,8 @@ public class ExtendedEuclidean{
         Triplet ans = extendedEuclideanAlgo(b, a.mod(b));
         return ans;
     }
+    
+    //han har tagetr peudokoden og programmeret den..
     public Triplet extendedEuclideanAlgo(BigInteger a, BigInteger b){
 
         if(BigInteger.ZERO.equals(b)){
