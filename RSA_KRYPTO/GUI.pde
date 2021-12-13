@@ -55,7 +55,7 @@ class GUI {
   
    
    void DecryptedMessage(String s) {
-     PlainText.setText(s);
+     KlarText.setText(s);
    } 
   
   void claerTextField() {

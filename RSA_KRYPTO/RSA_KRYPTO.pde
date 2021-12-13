@@ -1,4 +1,4 @@
-import controlP5.*; //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>//
+import controlP5.*; //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>//
 
 import java.util.Random;
 import java.util.List;
@@ -119,7 +119,7 @@ public BigInteger decrypt(BigInteger Cryptedmessage, BigInteger d, BigInteger N)
 void Decrypt() {
   String res = decryptedMessage.toString();
   gui.getEncryptedTextField();
-  gui.DecryptedMessage(res);
+  gui.DecryptedMessage(res.toString());
 }
 
 void encr() {
