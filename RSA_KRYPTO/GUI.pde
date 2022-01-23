@@ -14,12 +14,14 @@ class GUI {
       ;
 
 
+    //Plain text
     PlainText = cp5.addTextfield("text");
     PlainText.setPosition(100, 100)
       .setSize(200, 30)
       .setFocus(true)
       ;
-
+      
+      //Encrypted message goes here
     EncryptedMessages = cp5.addTextfield("EncryptedText");
     EncryptedMessages.setPosition(100, 150)
       .setSize(200, 30)
@@ -27,13 +29,14 @@ class GUI {
       ;
 
 
+    //Decryp knap
     Encrypt = cp5.addButton("Decrypt");
     Encrypt.setPosition(400, 150)
       .setSize(200, 30)
       .setLabel("Decrypt Message")
       ;
       
-      
+      //Decrypteret besked
     KlarText = cp5.addTextfield("PlainText");
     KlarText.setPosition(100, 200)
       .setSize(500, 40)

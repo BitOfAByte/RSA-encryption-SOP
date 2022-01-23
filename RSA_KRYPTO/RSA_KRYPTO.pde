@@ -1,4 +1,4 @@
-import controlP5.*; //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>//
+import controlP5.*; //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>//
 
 import java.util.Random;
 import java.util.List;
@@ -44,9 +44,10 @@ void encyptMessage(String message) {
   BigInteger p = BigInteger.valueOf(1031);
   BigInteger q = BigInteger.valueOf(907);
   BigInteger n = p.multiply(q);
-  BigInteger phi = p.subtract(BigInteger.ONE).multiply(q.subtract(BigInteger.ONE));
+  BigInteger phi = p.subtract(BigInteger.ONE).multiply(q.subtract(BigInteger.ONE)); //(p-1)*(q-1)
   
   int e1;
+  // For loop for at regne e
   for (e1 = 2; e1 < phi.intValue(); e1++) {
     BigInteger a = gcd(BigInteger.valueOf(e1), phi);
     // e is for public key exponent
@@ -55,7 +56,8 @@ void encyptMessage(String message) {
     }
   }
   BigInteger e = BigInteger.valueOf(e1);
-  BigInteger d = Euclidean.modInverse(e, phi);
+  //Private key exponent
+  BigInteger d = Euclidean.modInverse(e, phi); //<>//
 
   messageLength = message.length();
   for (int i = 0; i < messageLength; i++) {
